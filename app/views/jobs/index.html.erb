@@ -1,7 +1,10 @@
-<h1>Jobs</h1>
+<div class="alignContent">
+  <h1>Jobs</h1>
 
-<ul>
-  <% @jobs.each do |job| %>
-  <li><%= link_to job.title, job_path(job) %></li>
-  <% end %>
-</ul>
+  <ul>
+    <% @jobs.each do |job| %>
+    <li><%= link_to job.title, job_path(job) %></li>
+    <% end %>
+  </ul>
+
+</div>

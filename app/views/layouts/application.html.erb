@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   </head>
   <body>
     <div class="header">
@@ -12,25 +13,28 @@
       <h2>Crowd-sourced repairs!</h2>
     </div>
     <div class="navigation-menu">
-      <ul>
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "See All Jobs", jobs_path%></li>
-        <li><%= link_to "Add Your Job", new_job_path %></li>
-        <% if worker_signed_in? %>
-          <p class="login-notice"><em>You're signed into your <%= current_worker.email %> <b>worker account</b></em></p>
-          <li><%= link_to "Worker Dashboard", worker_path(current_worker) %></li>
-          <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
-        <% elsif user_signed_in? %>
-          <p class="login-notice"><em>You're signed in as <%= current_user.email %></em></p>
-          <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
-          <li><%= link_to "Register as a Worker", new_worker_path %></li>
-        <% else %>
-        <li><%= link_to "Register as a Worker", new_worker_path %></li>
-        <li><%= link_to "Register to Post Jobs", new_user_registration_path %></li>
-        <li><%= link_to "Log In as User", new_user_session_path %></li>
-        <li><%= link_to "Log In as Worker", new_worker_session_path %></li>
-        <% end %>
-      </ul>
+      <span style="float: left; width: 100%;">
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "See All Jobs", jobs_path%></li>
+          <li><%= link_to "Add Your Job", new_job_path %></li>
+          <br>
+
+          <% if worker_signed_in? %>
+            <li><%= link_to "Worker Dashboard", worker_path(current_worker) %></li>
+            <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
+            <p class="login-notice"><em>You're signed into your <%= current_worker.email %> <b>worker account</b></em></p>
+          <% elsif user_signed_in? %>
+            <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
+            <li><%= link_to "Register as a Worker", new_worker_path %></li>
+              <p class="login-notice"><em>You're signed in as <%= current_user.email %></em></p>
+          <% else %>
+          <p>Register as <%= link_to "Worker", new_worker_path %> or <%= link_to "User", new_user_registration_path %> &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp;
+          Log In as <%= link_to "Worker", new_worker_session_path %> or <%= link_to "User", new_user_session_path %></p>
+          <% end %>
+        </ul>
+      </span>
+
     </div>
     <div class="content">
     <div class="flash-messages">
