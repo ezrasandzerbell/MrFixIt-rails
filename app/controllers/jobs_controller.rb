@@ -11,6 +11,7 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+    @worker = current_worker
   end
 
   def create
@@ -25,7 +26,13 @@ class JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
     if current_worker
-      if @job.update(pending: true, worker_id: current_worker.id)
+      if params[:completed] && params[:active]
+        @job.update(completed: params[:completed], active: params[:active])
+        respond_to do |format|
+          format.html { redirect_to jobs_path }
+          format.js
+        end
+      elsif @job.update(pending: true, worker_id: current_worker.id)
         flash[:notice] = "You've successfully claimed this job."
         respond_to do |format|
           format.html { redirect_to jobs_path }

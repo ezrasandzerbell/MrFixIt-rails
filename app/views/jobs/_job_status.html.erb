@@ -1,0 +1,13 @@
+<% if @job.completed == true %>
+  <p>
+    You have completed this project.
+  </p>
+<% elsif @job.active == true %>
+  <p>
+    You are currently working on this project.
+  </p>
+<% else %>
+  <p>
+    You have claimed this project but are not currently working on it.
+  </p>
+<% end %>

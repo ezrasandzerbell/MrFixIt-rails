@@ -2,7 +2,21 @@
 
 <h3><%= @job.description %></h3>
 
-<% if @job.pending %>
+<% if @job.worker_id == @worker.id %>
+
+  <%= form_for @job, :method => "patch", remote: true do |f| %>
+    <%= hidden_field_tag :active, '' %>
+    <%= check_box_tag :active, checked = true %>
+    <%= f.label :active, "I am currently working on this project"  %>
+    <%= hidden_field_tag :completed, '' %>
+    <%= check_box_tag :completed, checked = true %>
+    <%= f.label :completed, "I have completed this project"  %>
+    <%= f.submit %>
+  <% end %>
+
+  <div id="jobStatus"></div>
+
+<% elsif @job.pending %>
   <p>Someone has already claimed this job; it's currently pending.</p>
 <% else %>
 <p>No one has claimed this job!</p>
