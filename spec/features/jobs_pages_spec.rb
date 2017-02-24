@@ -14,9 +14,30 @@ describe 'jobs path' do
     click_on 'Create Job'
     expect(page).to have_content('Tiler')
   end
+  it 'will fail to create a job' do
+    worker = FactoryGirl.create(:worker)
+    visit root_path
+    click_on 'Log In as Worker'
+    fill_in 'Email', :with => 'worker@test.com'
+    fill_in 'Password', :with => '123123'
+    click_on 'Log in'
+    click_on 'Add Your Job'
+    click_on 'Create Job'
+    expect(page).to have_content("Failed to create new job.")
+  end
 end
 
+
 describe 'jobs path' do
+  it 'will try to claim job without authentication' do
+    job = FactoryGirl.create(:job)
+    visit root_path
+    click_on 'See All Jobs'
+    click_on 'Roof Tiling'
+    click_on 'click here to claim it now'
+    expect(page).to have_content('
+You must have a worker account to claim a job.')
+  end
   it 'will claim a job', js: true do
     worker = FactoryGirl.create(:worker)
     job = FactoryGirl.create(:job)
