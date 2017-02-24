@@ -9,6 +9,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'devise'
+gem 'chartkick', '~> 2.2.3'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -16,6 +20,11 @@ group :development, :test do
   gem 'launchy'
   gem 'pry'
   gem 'shoulda-matchers'
+  gem 'capybara'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'simplecov', require: false
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -26,4 +35,3 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'devise'
